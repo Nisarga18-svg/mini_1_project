@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Help Desk</title>
+</head>
+<body>
+
+<h1>🎓 Student Help Desk</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Your Name" required><br><br>
+    <input type="email" name="email" placeholder="Your Email" required><br><br>
+    <textarea name="question" placeholder="Your Question" required></textarea><br><br>
+    <button type="submit">Submit</button>
+</form>
+
+<hr>
+
+<h2>All Queries</h2>
+
+<ul>
+    {% for q in queries %}
+        <li>
+            <b>{{ q.name }}</b> ({{ q.status }})<br>
+            ❓ {{ q.question }}<br>
+            💬 {{ q.answer|default:"No reply yet" }}<br>
+            <hr>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
